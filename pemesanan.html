@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Hotel SF - Tempat Menginap yang Nyaman dan Terjangkau">
+    <title>HOTEL SF</title>
+    <link rel="stylesheet" href="pemesanan.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1>HOTEL SF</h1>
+            <nav>
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="kamar.html">Kamar</a></li>
+                    <li><a href="fasilitas.html">Fasilitas</a></li>
+                    <li><a href="te.html">Pemesanan</a></li>
+                    <li><a href="login.html">Login Admin</a></li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    <form id="form-pemesanan">
+        <label for="id-pemesanan">Id Pemesanan:</label>
+        <input type="number" id="id-pemesanan" value="1" required><br>
+  
+        <label for="nama-pemesan">Nama Pemesan:</label>
+        <input type="text" id="nama-pemesan" required><br>
+  
+        <label for="nomor-identitas">Nomor Identitas:</label>
+        <input type="text" id="nomor-identitas" required><br>
+  
+        <label for="tipe-kamar">Tipe Kamar:</label>
+        <select id="tipe-kamar" required>
+          <option value="">--Pilih--</option>
+          <option value="standar">STANDAR (500000)</option>
+          <option value="deluxe">DELUXE (750000)</option>
+          <option value="family">FAMILY (1200000)</option>
+        </select><br>
+  
+        <div id="harga-info" class="harga"></div><br>
+  
+        <label for="tanggal-pesan">Tanggal Pesan:</label>
+        <input type="date" id="tanggal-pesan" required><br>
+  
+        <label for="durasi">Durasi Menginap:</label>
+        <input type="number" id="durasi" required> Hari<br>
+  
+        <label for="breakfast">Termasuk Breakfast:</label>
+        <input type="checkbox" id="breakfast" value="ya"> Ya<br>
+  
+        <label for="total-bayar">Total Bayar:</label>
+        <input type="text" id="total-bayar" disabled><br>
+  
+        <button type="button" id="save-btn" style="background-color:rgb(28, 166, 195)">Simpan</button>
+        <button type="reset" style="background-color:rgb(18, 166, 195)">Batal</button>
+      </form> 
+  
+      <script>
+        // Fungsi untuk menampilkan harga berdasarkan tipe kamar yang dipilih
+        function updateHarga() {
+          const tipeKamar = document.getElementById("tipe-kamar").value;
+          let hargaPerHari = 0;
+          let hargaText = "";
+  
+          if (tipeKamar === "standar") {
+            hargaPerHari = 500000;
+            hargaText = "Harga: Rp 500.000 per malam";
+          } else if (tipeKamar === "deluxe") {
+            hargaPerHari = 750000;
+            hargaText = "Harga: Rp 750.000 per malam";
+          } else if (tipeKamar === "family") {
+            hargaPerHari = 1000000;
+            hargaText = "Harga: Rp 1.000.000 per malam";
+          }
+  
+          // Menampilkan harga di bawah pilihan tipe kamar
+          document.getElementById("harga-info").textContent = hargaText;
+          
+          return hargaPerHari;
+        }
+  
+        function calculateTotalBayar() {
+          const durasi = parseInt(document.getElementById("durasi").value) || 0;
+          const hargaPerHari = updateHarga();
+          let totalBayar = hargaPerHari * durasi;
+          if (document.getElementById("breakfast").checked) {
+            totalBayar += 50000 * durasi; // Tambahkan biaya breakfast
+          }
+          document.getElementById("total-bayar").value = "Rp " + totalBayar.toLocaleString();
+          return totalBayar;
+        }
+  
+        document.getElementById("tipe-kamar").addEventListener("change", function() {
+          calculateTotalBayar();
+        });
+  
+        document.getElementById("durasi").addEventListener("input", function() {
+          calculateTotalBayar();
+        });
+  
+        document.getElementById("breakfast").addEventListener("change", function() {
+          calculateTotalBayar();
+        });
+  
+        document.getElementById("save-btn").addEventListener("click", function() {
+          // Ambil nilai dari input form
+          const idPemesanan = document.getElementById("id-pemesanan").value;
+          const namaPemesan = document.getElementById("nama-pemesan").value;
+          const nomorIdentitas = document.getElementById("nomor-identitas").value;
+          const tipeKamar = document.getElementById("tipe-kamar").value;
+          const tanggalPesan = document.getElementById("tanggal-pesan").value;
+          const durasi = document.getElementById("durasi").value;
+          const breakfast = document.getElementById("breakfast").checked ? "Ya" : "Tidak";
+  
+          // Validasi form
+          if (!namaPemesan || !nomorIdentitas || !tipeKamar || !tanggalPesan || !durasi) {
+            alert("Harap lengkapi semua field yang wajib diisi.");
+            return;
+          }
+  
+          // Hitung total bayar
+          const totalBayar = calculateTotalBayar();
+  
+          // Format tanggal
+          const tanggal = new Date(tanggalPesan);
+          const formattedDate = tanggal.toLocaleDateString();
+          // Menampilkan div hasil
+          document.getElementById("hasil").style.display = "block";
+        });
+      </script>
+    <footer>
+        <p>&copy; 2025 HOTEL Shidiq Firdaus</p>
+    </footer>
+</body>
+</html>
+<div id="hasil" style="display:none; margin-top:20px; border:1px solid #ccc; padding:10px;">
+  <h2>Hasil Pesanan</h2>
+  <p><strong>Id Pemesanan:</strong> <span id="hasil-id-pemesanan"></span></p>
+  <p><strong>Nama Pemesan:</strong> <span id="hasil-nama-pemesan"></span></p>
+  <p><strong>Nomor Identitas:</strong> <span id="hasil-nomor-identitas"></span></p>
+  <p><strong>Tipe Kamar:</strong> <span id="hasil-tipe-kamar"></span></p>
+  <p><strong>Tanggal Pesan:</strong> <span id="hasil-tanggal-pesan"></span></p>
+  <p><strong>Durasi Menginap:</strong> <span id="hasil-durasi"></span> Hari</p>
+  <p><strong>Termasuk Breakfast:</strong> <span id="hasil-breakfast"></span></p>
+  <p><strong>Total Bayar:</strong> <span id="hasil-total-bayar"></span></p>
+</div>

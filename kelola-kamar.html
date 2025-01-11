@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Kelola Jenis Kamar - SF Hotel">
+    <title>Kelola Jenis Kamar - SF HOTEL</title>
+    <link rel="stylesheet" href="Admin.css">
+</head>
+<body>
+    <header>
+        <div class="navbar">
+            <h1>SF Hotel - Kelola Jenis Kamar</h1>
+            <nav>
+                <ul>
+                    <li><a href="admin-dashboard.html">Dashboard</a></li>
+                    <li><a href="kelola-kamar.html">Kelola Kamar</a></li>
+                    <li><a href="kelola-fasilitas.html">Kelola Fasilitas</a></li>
+                    <li><a href="kelola-pesanan.html">Kelola Pemesanan</a></li>
+                    <li><a href="index.html" class="logout-btn">Logout</a></li> <!-- Tombol Logout -->
+                </ul>
+            </nav>
+        </div>
+    </header>
+
+    <section class="manage-rooms">
+        <h2>Kelola Jenis Kamar</h2>
+        <div class="room-actions">
+            <button class="add-room-btn">Tambah Kamar</button>
+        </div>
+
+        <table>
+            <thead>
+                <tr>
+                    <th>Nama Kamar</th>
+                    <th>Harga</th>
+                    <th>Deskripsi</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Kamar Standar</td>
+                    <td>Rp 500.000</td>
+                    <td>Kamar nyaman dengan fasilitas dasar</td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Hapus</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kamar Deluxe</td>
+                    <td>Rp 750.000</td>
+                    <td>Kamar luas dengan fasilitas premium</td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Hapus</button>
+                    </td>
+                </tr>
+                <tr>
+                    <td>Kamar Suite</td>
+                    <td>Rp 1.200.000</td>
+                    <td>Kamar mewah dengan fasilitas lengkap</td>
+                    <td>
+                        <button class="edit-btn">Edit</button>
+                        <button class="delete-btn">Hapus</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </section>
+
+    <footer>
+        <p>&copy; 2025 HOTEL Shidiq Firdaus</p>
+    </footer>
+</body>
+</html>
